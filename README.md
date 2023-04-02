@@ -4,6 +4,8 @@ PoroLobby creates 5v5 Practice Tool with bots in League of Legends. This tool ac
 
 ## How to use
 
+### [in MAC](./macOS.md)
+
 ### Easy way
 
 Video guide (deprecated):
@@ -47,7 +49,7 @@ The list of all bot IDs is available in [availableBots.json](https://github.com/
 
 This tool uses the official League Client API, and therfore the use of this tool should not be bannable by Riot Games. That said, League of Poro provides no guarantee whatsoever. Use at your own risk!
 
-## License 
+## License
 
 This tool is distributed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
 
