@@ -69,8 +69,9 @@ if [[ "$(sudo -H pipenv --venv 2>/dev/null)" == "" ]]; then
 else
     # if clear pipenv
     if [ $clean_env -ne 0 ]; then
-    sudo -H pipenv --rm
-    sudo -H pipenv --python $py_path install
+        sudo -H pipenv --rm
+        sudo -H pipenv --python $py_path install
+    fi
 fi
 # if clear
 sudo -H pipenv run python ./porolobby.py
