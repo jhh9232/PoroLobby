@@ -1,5 +1,6 @@
 import psutil
 import requests
+import platform
 from exceptions.ClientNotRunningException import ClientNotRunningException
 
 # This class was inspired by lcu-driver: https://github.com/sousa-andre/lcu-driver
@@ -23,17 +24,29 @@ class ConnectionManager:
 
     def get(self, url) -> requests.Response:
         return self.session.get(self.baseUrl + url)
-    
+
     def post(self, url, jsonData) -> requests.Response:
         return self.session.post(self.baseUrl + url, json=jsonData)
+
+    def getProcessNameInOS(self):
+        processName = "LeagueClientUx"
+        if "windows" in platform.platform().lower():
+            return processName + ".exe"
+        # if "macos" in platform.platform().lower():
+        #     return processName
+        # if "darwin" in platform.platform().lower():
+        #     return processName
+        # If WSL, output in "Linux"
+        return processName
 
     def isConnected(self):
         return self.get("/lol-summoner/v1/current-summoner").status_code == 200
     def _findLeagueClientProcess(self) -> psutil.Process:
+        LeagueClientUx_processName = self.getProcessNameInOS()
         for proc in psutil.process_iter():
-            if proc.name() == "LeagueClientUx.exe":
+            if proc.name() == LeagueClientUx_processName:
                 return proc
-    
+
     def _extractConnectionSettings(self) -> None:
         for item in self.proc.cmdline():
             if item.startswith('--app-pid='):
